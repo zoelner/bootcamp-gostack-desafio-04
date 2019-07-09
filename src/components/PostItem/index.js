@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-function PostItem() {
+function PostItem(props) {
   return (
     <div className="post">
       <header className="post-header">
@@ -9,39 +9,33 @@ function PostItem() {
           className="avatar"
           width="32"
           height="32"
-          src="https://i.pravatar.cc/32"
+          src={props.author.avatar}
           alt="Avatar"
         />
         <div className="details">
-          <span>John Doe</span>
-          <small>08/07/2019 20:39:17</small>
+          <span>{props.author.name}</span>
+          <small>{props.date}</small>
         </div>
       </header>
-      <p className="post-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-        doloribus quam obcaecati repellat quia facilis esse. Quae consectetur
-        accusamus, alias tempore error molestiae impedit, quam cupiditate
-        assumenda voluptatibus sed praesentium.
-      </p>
+      <p className="post-content">{props.content} </p>
       <div className="post-comments">
         <div className="divider" />
-        <div className="comment">
-          <img
-            className="avatar"
-            width="32"
-            height="32"
-            src="https://i.pravatar.cc/33"
-            alt="Avatar"
-          />
+        {props.comments.map(comment => (
+          <div className="comment" key={comment.id}>
+            <img
+              className="avatar"
+              width="32"
+              height="32"
+              src={comment.author.avatar}
+              alt={comment.author.name}
+            />
 
-          <p>
-            <span>Sarah Jane</span>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            ipsa aperiam earum quis consequatur blanditiis, ut quisquam iure
-            quod voluptatum perferendis nihil accusantium explicabo, delectus
-            asperiores facilis, nemo dolorem maxime.
-          </p>
-        </div>
+            <p>
+              <span>{comment.author.name}</span>
+              {comment.content}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
